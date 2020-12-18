@@ -125,9 +125,10 @@
         <names variable="director"/>
         <text macro="substitute-title"/>
         <choose>
-          <if position="subsequent">
+          <if variable="title" match="none"/>
+          <else-if position="subsequent">
             <text variable="title" form="short" quotes="true"/>
-          </if>
+          </else-if>
         </choose>
         <text macro="title"/>
       </substitute>
