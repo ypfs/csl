@@ -537,7 +537,6 @@
         </group>
       </else>
     </choose>
-    <text value=""/>
   </macro>
   <macro name="issue">
     <choose>
