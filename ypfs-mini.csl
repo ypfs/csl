@@ -641,7 +641,7 @@
                   <text macro="substitute-title"/>
                 </else-if>
                 <else>
-                  <text macro="title"/>
+                  <text macro="title" form="short" quotes="true"/>
                 </else>
               </choose>
               <text macro="date-in-text"/>
