@@ -452,9 +452,9 @@
       </else-if>
       <else>
         <text term="no date" form="short"/>
-        <text variable="year-suffix"/>
       </else>
     </choose>
+    <text variable="year-suffix"/>
   </macro>
   <macro name="day-month">
     <date variable="issued">
