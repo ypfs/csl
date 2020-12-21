@@ -19,7 +19,7 @@
     <category citation-format="author-date"/>
     <category field="history"/>
     <summary>The combined Key Program Document and references variant of YPFS style</summary>
-    <updated>2020-12-10T18:21:29-05:00</updated>
+    <updated>2020-12-21T13:25:29-05:00</updated>
     <rights license="http://creativecommons.org/licenses/by-sa/3.0/">This work is licensed under a Creative Commons Attribution-ShareAlike 3.0 License</rights>
   </info>
   <locale xml:lang="en">
@@ -403,7 +403,7 @@
       </if>
       <else-if type="legal_case" match="none">
         <group delimiter=" ">
-          <text variable="container-title" text-case="title"/>
+          <text variable="container-title" text-case="title" font-style="italic"/>
           <choose>
             <if type="post-weblog">
               <text value="(blog)"/>
@@ -596,7 +596,7 @@
     <layout prefix="(" suffix=")" delimiter="; ">
       <group delimiter=", ">
         <choose>
-          <if variable="issued accessed" match="any">
+          <if variable="issued">
             <group delimiter=" ">
               <text macro="contributors-short"/>
               <text macro="date-in-text"/>
@@ -622,10 +622,7 @@
       <key variable="title"/>
     </sort>
     <layout>
-      <group delimiter=", " prefix="(" suffix=") " display="left-margin">
-        <choose>
-          <if variable="issued accessed" match="any">
-            <group delimiter=" ">
+      <group prefix="(" suffix=") " display="left-margin">
               <choose>
                 <if variable="author editor translator director" match="any">
                   <names variable="author">
@@ -644,16 +641,14 @@
                   <text variable="title" form="short" quotes="true"/>
                 </else>
               </choose>
-              <text macro="date-in-text"/>
-            </group>
-          </if>
-          <else>
-            <group delimiter=", ">
-              <text macro="contributors-short"/>
-              <text macro="date-in-text"/>
-            </group>
-          </else>
-        </choose>
+              <choose>
+                <if variable="issued">
+                  <text macro="date-in-text" prefix=" "/>
+                </if>
+                <else>
+                  <text macro="date-in-text" prefix=", "/>
+                </else>
+              </choose>
       </group>
       <group suffix="." display="right-inline">
         <text macro="contributors" suffix=". "/>
