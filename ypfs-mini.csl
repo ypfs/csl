@@ -626,7 +626,24 @@
         <choose>
           <if variable="issued accessed" match="any">
             <group delimiter=" ">
-              <text macro="contributors-short"/>
+              <choose>
+                <if variable="author editor translator director" match="any">
+                  <names variable="author">
+                    <name form="short" and="text" delimiter=", " initialize-with=". "/>
+                    <substitute>
+                      <names variable="editor"/>
+                      <names variable="translator"/>
+                      <names variable="director"/>
+                    </substitute>
+                  </names>
+                </if>
+                <else-if type="article-magazine article-newspaper review review-book" match="any">
+                  <text macro="substitute-title"/>
+                </else-if>
+                <else>
+                  <text macro="title"/>
+                </else>
+              </choose>
               <text macro="date-in-text"/>
             </group>
           </if>
@@ -640,8 +657,8 @@
       </group>
       <group suffix="." display="right-inline">
         <text macro="contributors" suffix=". "/>
-        <text macro="date" suffix=". "/>
-        <text macro="title"/>
+        <text macro="date"/>
+        <text macro="title" prefix=". "/>
         <text macro="description"/>
         <text macro="secondary-contributors" prefix=". "/>
         <text macro="container-title" prefix=". "/>
