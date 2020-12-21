@@ -623,32 +623,32 @@
     </sort>
     <layout>
       <group prefix="(" suffix=") " display="left-margin">
-              <choose>
-                <if variable="author editor translator director" match="any">
-                  <names variable="author">
-                    <name form="short" and="text" delimiter=", " initialize-with=". "/>
-                    <substitute>
-                      <names variable="editor"/>
-                      <names variable="translator"/>
-                      <names variable="director"/>
-                    </substitute>
-                  </names>
-                </if>
-                <else-if type="article-magazine article-newspaper review review-book" match="any">
-                  <text macro="substitute-title"/>
-                </else-if>
-                <else>
-                  <text variable="title" form="short" quotes="true"/>
-                </else>
-              </choose>
-              <choose>
-                <if variable="issued">
-                  <text macro="date-in-text" prefix=" "/>
-                </if>
-                <else>
-                  <text macro="date-in-text" prefix=", "/>
-                </else>
-              </choose>
+        <choose>
+          <if variable="author editor translator director" match="any">
+            <names variable="author">
+              <name form="short" and="text" delimiter=", " initialize-with=". "/>
+              <substitute>
+                <names variable="editor"/>
+                <names variable="translator"/>
+                <names variable="director"/>
+              </substitute>
+            </names>
+          </if>
+          <else-if type="article-magazine article-newspaper review review-book" match="any">
+            <text macro="substitute-title"/>
+          </else-if>
+          <else>
+            <text variable="title" form="short" quotes="true"/>
+          </else>
+        </choose>
+        <choose>
+          <if variable="issued">
+            <text macro="date-in-text" prefix=" "/>
+          </if>
+          <else>
+            <text macro="date-in-text" prefix=", "/>
+          </else>
+        </choose>
       </group>
       <group suffix="." display="right-inline">
         <text macro="contributors" suffix=". "/>
