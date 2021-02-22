@@ -124,12 +124,7 @@
         <names variable="translator"/>
         <names variable="director"/>
         <text macro="substitute-title"/>
-        <choose>
-          <if variable="title" match="none"/>
-          <else-if position="subsequent">
-            <text variable="title" form="short" quotes="true"/>
-          </else-if>
-        </choose>
+	<text variable="title" form="short"/>
         <text macro="title"/>
       </substitute>
     </names>
@@ -638,7 +633,7 @@
             <text macro="substitute-title"/>
           </else-if>
           <else>
-            <text variable="title" form="short" quotes="true"/>
+            <text variable="title" form="short"/>
           </else>
         </choose>
         <choose>
