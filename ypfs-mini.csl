@@ -646,7 +646,15 @@
         </choose>
       </group>
       <group suffix="." display="right-inline">
-        <text macro="contributors" suffix=". "/>
+        <choose>
+          <if variable="filled">
+            <text variable="filled"/>
+            <text macro="contributors" prefix=" (" suffix="). "/>
+          </if>
+          <else>
+            <text macro="contributors" suffix=". "/>
+          </else>
+        </choose>
         <text macro="date"/>
         <text macro="title" prefix=". "/>
         <text macro="description"/>
