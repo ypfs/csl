@@ -124,7 +124,7 @@
         <names variable="translator"/>
         <names variable="director"/>
         <text macro="substitute-title"/>
-	<text variable="title" form="short"/>
+	      <text variable="title" form="short"/>
         <text macro="title"/>
       </substitute>
     </names>
@@ -559,7 +559,6 @@
         <group delimiter=", " prefix=", ">
           <group delimiter=" ">
             <!--Needs Localization-->
-            <text value="filed"/>
             <date variable="submitted" form="text"/>
           </group>
           <group delimiter=" ">
@@ -647,8 +646,8 @@
       </group>
       <group suffix="." display="right-inline">
         <choose>
-          <if variable="filled">
-            <text variable="filled"/>
+          <if variable="filed">
+            <text variable="filed"/>
             <text macro="contributors" prefix=" (" suffix="). "/>
           </if>
           <else>
