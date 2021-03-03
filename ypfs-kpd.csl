@@ -113,17 +113,24 @@
     </group>
   </macro>
   <macro name="contributors-short">
-    <names variable="author">
-      <name form="short" and="text" delimiter=", " initialize-with=". "/>
-      <substitute>
-        <names variable="editor"/>
-        <names variable="translator"/>
-        <names variable="director"/>
-        <text macro="substitute-title"/>
-	      <text variable="title" form="short"/>
-        <text macro="title"/>
-      </substitute>
-    </names>
+    <choose>
+      <if variable="filed">
+        <text variable="filed"/>
+      </if>
+      <else>
+        <names variable="author">
+          <name form="short" and="text" delimiter=", " initialize-with=". "/>
+          <substitute>
+            <names variable="editor"/>
+            <names variable="translator"/>
+            <names variable="director"/>
+            <text macro="substitute-title"/>
+            <text variable="title-short"/>
+            <text macro="title"/>
+          </substitute>
+        </names>
+      </else>
+    </choose>
   </macro>
   <macro name="interviewer">
     <names variable="interviewer" delimiter=", ">
@@ -614,32 +621,71 @@
     <layout>
       <group text-decoration="underline" delimiter=" ">
         <choose>
-            <if variable="title">
-                <text variable="title"/>
+        <if variable="title" match="none">
+          <choose>
+            <if type="personal_communication" match="none">
+              <text variable="genre" text-case="capitalize-first"/>
+            </if>
+          </choose>
+        </if>
+        <else-if type="bill book graphic legislation motion_picture song" match="any">
+          <text variable="title" text-case="title"/>
+          <group prefix=" (" suffix=")" delimiter=" ">
+            <text term="version"/>
+            <text variable="version"/>
+          </group>
+        </else-if>
+        <else-if variable="reviewed-author">
+          <choose>
+            <if variable="reviewed-title">
+              <group delimiter=". ">
+                <text variable="title" text-case="title" quotes="true"/>
+                <group delimiter=", ">
+                  <text variable="reviewed-title" text-case="title" font-style="italic" prefix="Review of "/>
+                  <names variable="reviewed-author">
+                    <label form="verb-short" text-case="lowercase" suffix=" "/>
+                    <name and="text" delimiter=", "/>
+                  </names>
+                </group>
+              </group>
             </if>
             <else>
-                <text macro="contributors"/>
-            </else>
-        </choose>
-        <group prefix="(" suffix=")">
-            <choose>
-            <if variable="author editor translator director" match="any">
-                <names variable="author">
-                <name form="short" and="text" delimiter=", " initialize-with=". "/>
-                <substitute>
-                    <names variable="editor"/>
-                    <names variable="translator"/>
-                    <names variable="director"/>
-                </substitute>
+              <group delimiter=", ">
+                <text variable="title" text-case="title" font-style="italic" prefix="Review of "/>
+                <names variable="reviewed-author">
+                  <label form="verb-short" text-case="lowercase" suffix=" "/>
+                  <name and="text" delimiter=", "/>
                 </names>
-            </if>
-            <else-if type="article-magazine article-newspaper review review-book" match="any">
-                <text macro="substitute-title"/>
-            </else-if>
-            <else>
-                <text variable="title" form="short"/>
+              </group>
             </else>
-            </choose>
+          </choose>
+        </else-if>
+        <else-if type="legal_case interview patent" match="any">
+          <text variable="title"/>
+        </else-if>
+        <else>
+          <text variable="title" text-case="title" quotes="false"/>
+        </else>
+      </choose>
+        <group prefix="(" suffix=")">
+              <choose>
+                <if variable="filed">
+                  <text variable="filed"/>
+                </if>
+                <else>
+                  <names variable="author">
+                    <name form="short" and="text" delimiter=", " initialize-with=". "/>
+                    <substitute>
+                      <names variable="editor"/>
+                      <names variable="translator"/>
+                      <names variable="director"/>
+                      <text macro="substitute-title"/>
+                      <text variable="title-short"/>
+                      <text macro="title"/>
+                    </substitute>
+                  </names>
+                </else>
+              </choose>
             <choose>
             <if variable="issued">
                 <text macro="date-in-text" prefix=" "/>
