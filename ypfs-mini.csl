@@ -4,7 +4,7 @@
     <title>Yale Program on Financial Stability (for mini-cases)</title>
     <title-short>YPFS (mini-case)</title-short>
     <id>http://www.zotero.org/styles/ypfs-mini</id>
-    <link href="http://www.zotero.org/styles/ypfs-mini" rel="self"/>
+    <link href="http://github.com/runkelcorey/ypfs-zotero/ypfs-mini.csl" rel="self"/>
     <link href="https://www.zotero.org/styles/chicago-author-date" rel="template"/>
     <link href="http://www.chicagomanualofstyle.org/tools_citationguide.html" rel="documentation"/>
     <author>
@@ -19,7 +19,7 @@
     <category citation-format="author-date"/>
     <category field="history"/>
     <summary>The combined Key Program Document and references variant of YPFS style</summary>
-    <updated>2020-12-21T13:25:29-05:00</updated>
+    <updated>2021-03-03T15:25:29-05:00</updated>
     <rights license="http://creativecommons.org/licenses/by-sa/3.0/">This work is licensed under a Creative Commons Attribution-ShareAlike 3.0 License</rights>
   </info>
   <locale xml:lang="en">
