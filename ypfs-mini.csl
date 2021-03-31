@@ -160,11 +160,6 @@
         </else-if>
       </choose>
       <choose>
-        <if type="webpage post-weblog" match="any">
-          <date variable="issued" form="text"/>
-        </if>
-      </choose>
-      <choose>
         <if variable="issued" match="none">
           <group delimiter=" ">
             <text term="accessed" text-case="capitalize-first"/>
@@ -555,12 +550,7 @@
           <text macro="day-month"/>
         </group>
       </else-if>
-      <else-if type="article-newspaper article-magazine personal_communication" match="any">
-        <date variable="issued" form="text" prefix=", "/>
-      </else-if>
       <else-if type="report">
-        <date variable="issued" form="text" prefix=", "/>
-        <text macro="publisher" prefix=". "/>
       </else-if>
       <else-if type="patent">
         <group delimiter=", " prefix=", ">
@@ -661,6 +651,7 @@
             <text macro="contributors" suffix=". "/>
           </else>
         </choose>
+        <text macro="day-month" suffix=", "/>
         <text macro="date"/>
         <text macro="title" prefix=". "/>
         <text macro="description"/>
