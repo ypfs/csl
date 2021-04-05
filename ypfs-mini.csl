@@ -651,7 +651,10 @@
             <text macro="contributors" suffix=". "/>
           </else>
         </choose>
-        <text macro="day-month" suffix=", "/>
+        <date variable="issued" suffix=" ">
+          <date-part name="month"/>
+          <date-part name="day" prefix=" " suffix=","/>
+        </date>
         <text macro="date"/>
         <text macro="title" prefix=". "/>
         <text macro="description"/>
