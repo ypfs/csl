@@ -180,6 +180,7 @@
       </if>
       <else-if type="bill book graphic legislation motion_picture song" match="any">
         <text variable="title" text-case="title"/>
+	<text variable="original-title" prefix=" [" suffix="]"/>
         <group prefix=" (" suffix=")" delimiter=" ">
           <text term="version"/>
           <text variable="version"/>
@@ -215,6 +216,7 @@
       </else-if>
       <else>
         <text variable="title" text-case="title" quotes="true"/>
+	<text variable="original-title" prefix=" [" suffix="]"/>
       </else>
     </choose>
   </macro>
