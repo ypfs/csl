@@ -266,28 +266,25 @@
         </group>
       </if>
       <else-if type="bill legislation" match="any">
-        <choose>
-          <if variable="number">
-            <!--There's a public law number-->
-            <group delimiter=" ">
-              <text variable="chapter-number"/>
-              <text variable="authority" suffix=":"/>
-              <text variable="number"/>
-            </group>
-          </if>
-        </choose>
-          <group delimeter=" " prefix=", ">
-            <choose>
-              <if variable="section">
-                <text term="section" form="symbol"/>
-                <text variable="section"/>
-              </if>
-            </choose>
-          </group>
-        <group prefix=" (" suffix=")" delimiter=" ">
+        <group delimeter=" ">
           <text variable="volume"/>
           <text variable="container-title"/>
           <text variable="page-first"/>
+          <choose>
+            <if variable="section">
+              <text term="section" form="symbol"/>
+              <text variable="section"/>
+            </if>
+          </choose>
+        </group>
+        <group prefix=" (" suffix=")" delimiter=" ">
+          <choose>
+          <if variable="number">
+              <text variable="chapter-number"/>
+              <text variable="authority" suffix=":"/>
+              <text variable="number"/>
+          </if>
+          </choose>
         </group>
       </else-if>
     </choose>
@@ -472,7 +469,7 @@
         <text variable="status" text-case="capitalize-first"/>
       </else-if>
       <else>
-        <text term="no date"/>
+        <text term="no date" text-case="capitalize-first"/>
       </else>
     </choose>
   </macro>
