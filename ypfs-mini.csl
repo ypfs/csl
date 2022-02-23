@@ -180,7 +180,6 @@
       </if>
       <else-if type="bill book graphic legislation motion_picture song" match="any">
         <text variable="title" text-case="title"/>
-	<text variable="original-title" prefix=" [" suffix="]"/>
         <group prefix=" (" suffix=")" delimiter=" ">
           <text term="version"/>
           <text variable="version"/>
@@ -216,7 +215,6 @@
       </else-if>
       <else>
         <text variable="title" text-case="title" quotes="true"/>
-	<text variable="original-title" prefix=" [" suffix="]"/>
       </else>
     </choose>
   </macro>
@@ -247,6 +245,50 @@
             <text variable="edition" prefix=", "/>
           </else>
         </choose>
+      </else-if>
+    </choose>
+  </macro>
+  <macro name="legal-cites">
+    <choose>
+      <if type="legal_case">
+        <group delimiter=" ">
+          <text variable="authority"/>
+          <text variable="number" prefix="(No. " suffix=")"/>
+        </group>
+        <group delimiter=" " prefix=". ">
+          <choose>
+            <if variable="container-title">
+              <text variable="volume"/>
+              <text variable="container-title"/>
+              <text variable="page"/>
+            </if>
+          </choose>
+        </group>
+      </if>
+      <else-if type="bill legislation" match="any">
+        <choose>
+          <if variable="number">
+            <!--There's a public law number-->
+            <group delimiter=" ">
+              <text variable="chapter-number"/>
+              <text variable="authority" suffix=":"/>
+              <text variable="number"/>
+            </group>
+          </if>
+        </choose>
+          <group delimeter=" " prefix=", ">
+            <choose>
+              <if variable="section">
+                <text term="section" form="symbol"/>
+                <text variable="section"/>
+              </if>
+            </choose>
+          </group>
+        <group prefix=" (" suffix=")" delimiter=" ">
+          <text variable="volume"/>
+          <text variable="container-title"/>
+          <text variable="page-first"/>
+        </group>
       </else-if>
     </choose>
   </macro>
@@ -285,12 +327,10 @@
           </else>
         </choose>
       </if>
-      <else-if type="legal_case">
-        <text variable="volume" prefix=", "/>
-        <text variable="container-title" prefix=" "/>
-        <text variable="page" prefix=" "/>
+      <else-if type="legal_case bill legislation">
+        <text macro="legal-cites" prefix=". "/>
       </else-if>
-      <else-if type="bill book graphic legal_case legislation motion_picture report song" match="any">
+      <else-if type="book graphic motion_picture report song" match="any">
         <group prefix=". " delimiter=". ">
           <group>
             <text term="volume" form="short" text-case="capitalize-first" suffix=" "/>
@@ -400,7 +440,7 @@
       <if type="webpage">
         <text variable="container-title" text-case="title"/>
       </if>
-      <else-if type="legal_case" match="none">
+      <else-if type="legal_case bill legislation" match="none">
         <group delimiter=" ">
           <text variable="container-title" text-case="title" font-style="italic"/>
           <choose>
@@ -443,17 +483,19 @@
           <date variable="original-date" form="text" date-parts="year" prefix="[" suffix="]"/>
           <date variable="issued">
             <date-part name="year"/>
+            <text variable="year-suffix"/>
           </date>
         </group>
       </if>
       <else-if variable="status">
         <text variable="status"/>
+        <text variable="year-suffix" prefix=" "/>
       </else-if>
       <else>
         <text term="no date" form="short"/>
+        <text variable="year-suffix"/>
       </else>
     </choose>
-    <text variable="year-suffix"/>
   </macro>
   <macro name="day-month">
     <date variable="issued">
@@ -533,9 +575,6 @@
               <text variable="number"/>
             </if>
             <else-if type="bill legislation" match="any">
-              <text variable="chapter-number"/>
-              <text variable="authority" suffix=":"/>
-              <text variable="number"/>
             </else-if>
           </choose>
         </group>
@@ -544,10 +583,7 @@
   </macro>
   <macro name="issue">
     <choose>
-      <if type="legal_case">
-        <text variable="authority" prefix=". "/>
-      </if>
-      <else-if type="speech">
+      <if type="speech">
         <group prefix=". " delimiter=", ">
           <group delimiter=" ">
             <text variable="genre" text-case="capitalize-first"/>
@@ -556,7 +592,7 @@
           <text variable="event-place"/>
           <text macro="day-month"/>
         </group>
-      </else-if>
+      </if>
       <else-if type="report">
       </else-if>
       <else-if type="patent">
@@ -620,33 +656,20 @@
       <key variable="title"/>
     </sort>
     <layout suffix=".">
-      <group prefix="(" suffix=") " display="left-margin">
-        <choose>
-          <if variable="filed">
-            <text variable="filed"/>
-          </if>
-          <else>
-            <names variable="author">
-              <name form="short" and="text" delimiter=", " initialize-with=". "/>
-              <substitute>
-                <names variable="editor"/>
-                <names variable="translator"/>
-                <names variable="director"/>
-                <text macro="substitute-title"/>
-                <text variable="title-short"/>
-                <text macro="title"/>
-              </substitute>
-            </names>
-          </else>
-        </choose>
-        <choose>
-          <if variable="issued">
-            <text macro="date-in-text" prefix=" "/>
-          </if>
-          <else>
-            <text macro="date-in-text" prefix=", "/>
-          </else>
-        </choose>
+      <group prefix="(" suffix=") " delimiter=" " display="left-margin">
+          <choose>
+            <if variable="issued">
+              <text macro="contributors-short"/>
+              <text macro="date-in-text"/>
+            </if>
+            <!---comma before forthcoming and n.d.-->
+            <else>
+              <group delimiter=", ">
+                <text macro="contributors-short"/>
+                <text macro="date-in-text"/>
+              </group>
+            </else>
+          </choose>
       </group>
       <group suffix="." display="right-inline">
         <choose>
@@ -670,7 +693,7 @@
         <text macro="container-contributors"/>
         <text macro="edition"/>
         <text macro="locators-chapter"/>
-        <text macro="collection-title-journal" prefix=", " suffix=", "/>
+        <text macro="collection-title-journal" prefix=", "/>
         <text macro="locators"/>
         <text macro="collection-title" prefix=". "/>
         <text macro="issue"/>
