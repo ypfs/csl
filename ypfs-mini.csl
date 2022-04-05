@@ -657,7 +657,7 @@
       <key variable="title"/>
     </sort>
     <layout>
-      <group prefix="(" suffix=") " delimiter=" " display="left-margin">
+      <group prefix="(" suffix=") " delimiter=" ">
           <choose>
             <if variable="issued">
               <text macro="contributors-short"/>
@@ -672,7 +672,7 @@
             </else>
           </choose>
       </group>
-      <group suffix="." display="right-inline">
+      <group suffix=".">
         <choose>
           <if variable="filed">
             <text macro="contributors"/>
