@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <style xmlns="http://purl.org/net/xbiblio/csl" class="in-text" version="1.0" page-range-format="chicago" demote-non-dropping-particle="display-and-sort">
   <info>
-    <title>Yale Program on Financial Stability (for mini-cases)</title>
-    <title-short>YPFS (mini-case)</title-short>
-    <id>http://www.zotero.org/styles/ypfs-mini</id>
-    <link href="http://github.com/runkelcorey/ypfs-zotero/ypfs-mini.csl" rel="self"/>
+    <title>Yale Program on Financial Stability (for mini-cases without page numbers)</title>
+    <title-short>YPFS (mini-case no pages)</title-short>
+    <id>http://www.zotero.org/styles/ypfs-mini-no-pages</id>
+    <link href="http://github.com/runkelcorey/ypfs-zotero/ypfs-mini-no-pages.csl" rel="self"/>
     <link href="https://www.zotero.org/styles/chicago-author-date" rel="template"/>
     <link href="http://www.chicagomanualofstyle.org/tools_citationguide.html" rel="documentation"/>
     <author>
@@ -18,7 +18,7 @@
     </author>
     <category citation-format="author-date"/>
     <category field="history"/>
-    <summary>The combined Key Program Document and references variant of YPFS style</summary>
+    <summary>The combined Key Program Document and references variant of YPFS style that omits page numbers for certain item types</summary>
     <updated>2022-04-29T12:53:00-5:00</updated>
     <rights license="http://creativecommons.org/licenses/by-sa/3.0/">This work is licensed under a Creative Commons Attribution-ShareAlike 3.0 License</rights>
   </info>
@@ -630,11 +630,15 @@
   <citation et-al-min="4" et-al-use-first="1" disambiguate-add-year-suffix="true" disambiguate-add-names="true" disambiguate-add-givenname="true" givenname-disambiguation-rule="primary-name" collapse="year" after-collapse-delimiter="; ">
     <layout prefix="(" suffix=")" delimiter="; ">
       <group delimiter=", ">
-          <group delimiter=" ">
-            <text macro="contributors-short"/>
-            <text macro="date-in-text"/>
-          </group>
-        <text macro="point-locators"/>
+        <group delimiter=" ">
+          <text macro="contributors-short"/>
+          <text macro="date-in-text"/>
+        </group>
+        <choose>
+          <if type="bill book legislation legal_case manuscript thesis">
+            <text macro="point-locators"/>
+          </if>
+        </choose>
       </group>
     </layout>
   </citation>
