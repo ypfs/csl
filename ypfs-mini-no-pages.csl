@@ -8,8 +8,8 @@
     <link href="https://www.zotero.org/styles/chicago-author-date" rel="template"/>
     <link href="http://www.chicagomanualofstyle.org/tools_citationguide.html" rel="documentation"/>
     <author>
-      <name>Sean Fulmer</name>
-      <email>sean.fulmer@yale.edu</email>
+      <name>Ben Hoffner</name>
+      <email>benjamin.hoffner@yale.edu</email>
     </author>
     <author>
       <name>Corey Runkel</name>
@@ -19,7 +19,7 @@
     <category citation-format="author-date"/>
     <category field="history"/>
     <summary>The combined Key Program Document and references variant of YPFS style that omits page numbers for certain item types</summary>
-    <updated>2022-04-29T12:53:00-5:00</updated>
+    <updated>2022-05-17T12:53:00-5:00</updated>
     <rights license="http://creativecommons.org/licenses/by-sa/3.0/">This work is licensed under a Creative Commons Attribution-ShareAlike 3.0 License</rights>
   </info>
   <locale xml:lang="en">
@@ -179,7 +179,7 @@
         </choose>
       </if>
       <else-if type="bill book graphic legislation motion_picture song" match="any">
-        <text variable="title" text-case="title"/>
+        <text variable="title" text-case="title" font-style="italic"/>
         <group prefix=" (" suffix=")" delimiter=" ">
           <text term="version"/>
           <text variable="version"/>
@@ -299,10 +299,13 @@
         <choose>
           <if variable="volume">
             <text variable="volume" prefix=" "/>
-            <group prefix=" (" suffix=")">
+            <group prefix=", ">
               <choose>
                 <if variable="issue">
-                  <text variable="issue"/>
+                  <group delimiter=" ">
+                    <text term="issue" form="short"/>
+                    <text variable="issue"/>
+                  </group>
                 </if>
                 <else>
                   <date variable="issued">
@@ -594,7 +597,12 @@
           <text macro="day-month"/>
         </group>
       </if>
+      <else-if type="article-newspaper article-magazine personal_communication" match="any">
+        <date variable="issued" form="text" prefix=", "/>
+      </else-if>
       <else-if type="report">
+        <date variable="issued" form="text" prefix=", "/>
+        <text macro="publisher" prefix=". "/>
       </else-if>
       <else-if type="patent">
         <group delimiter=", " prefix=", ">
@@ -664,12 +672,8 @@
             <text macro="contributors" suffix=". "/>
           </else>
         </choose>
-        <date variable="issued" suffix=" ">
-          <date-part name="month"/>
-          <date-part name="day" prefix=" " suffix=","/>
-        </date>
-        <text macro="date"/>
-        <text macro="title" prefix=". "/>
+        <text macro="date" suffix=". "/>
+        <text macro="title"/>
         <text macro="description"/>
         <text macro="secondary-contributors" prefix=". "/>
         <text macro="container-title" prefix=". "/>
