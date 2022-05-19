@@ -601,7 +601,6 @@
         <date variable="issued" form="text" prefix=", "/>
       </else-if>
       <else-if type="report">
-        <date variable="issued" form="text" prefix=", "/>
         <text macro="publisher" prefix=". "/>
       </else-if>
       <else-if type="patent">
