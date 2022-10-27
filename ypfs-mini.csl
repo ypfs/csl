@@ -178,8 +178,15 @@
           </if>
         </choose>
       </if>
-      <else-if type="book graphic motion_picture song" match="any">
+      <else-if type="book motion_picture song" match="any">
         <text variable="title" text-case="title" font-style="italic"/>
+        <group prefix=" (" suffix=")" delimiter=" ">
+          <text term="version"/>
+          <text variable="version"/>
+        </group>
+      </else-if>
+      <else-if type="graphic" match="any">
+        <text variable="title" text-case="title" font-weight="bold"/>
         <group prefix=" (" suffix=")" delimiter=" ">
           <text term="version"/>
           <text variable="version"/>
