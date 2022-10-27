@@ -178,7 +178,7 @@
           </if>
         </choose>
       </if>
-      <else-if type="bill book graphic legislation motion_picture song" match="any">
+      <else-if type="book graphic motion_picture song" match="any">
         <text variable="title" text-case="title" font-style="italic"/>
         <group prefix=" (" suffix=")" delimiter=" ">
           <text term="version"/>
@@ -212,6 +212,13 @@
       </else-if>
       <else-if type="legal_case interview patent" match="any">
         <text variable="title"/>
+      </else-if>
+      <else-if type="bill document legislation" match="any">
+        <text variable="title" text-case="title"/>
+        <group prefix=" (" suffix=")" delimiter=" ">
+          <text term="version"/>
+          <text variable="version"/>
+        </group>
       </else-if>
       <else>
         <text variable="title" text-case="title" quotes="true"/>
@@ -446,7 +453,7 @@
       </if>
       <else-if type="legal_case bill legislation" match="none">
         <group delimiter=" ">
-          <text variable="container-title" text-case="title" font-style="italic"/>
+          <text variable="container-title" text-case="title"/>
           <choose>
             <if type="post-weblog">
               <text value="(blog)"/>
@@ -601,7 +608,7 @@
         <date variable="issued" form="text" prefix=", "/>
       </else-if>
       <else-if type="report">
-        <text macro="publisher" prefix=". "/>
+        <date variable="issued" form="text" prefix=", "/>
       </else-if>
       <else-if type="patent">
         <group delimiter=", " prefix=", ">
