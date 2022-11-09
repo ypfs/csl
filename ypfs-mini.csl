@@ -460,7 +460,7 @@
       </if>
       <else-if type="legal_case bill legislation" match="none">
         <group delimiter=" ">
-          <text variable="container-title" text-case="title"/>
+          <text variable="container-title" text-case="title" font-style="italic"/>
           <choose>
             <if type="post-weblog">
               <text value="(blog)"/>
